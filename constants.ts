@@ -93,7 +93,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'c6',
     title: '客製組合字斗方',
-    description: '歡迎私訊問價',
+    description: '私訊問價',
     price: 888,
     imageUrl: './customize.jpg',
     category: 'couplet',

@@ -15,7 +15,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     imageUrl: './collections/c05.jpg',
     year: '2025',
     dimensions: '69x135cm',
-    description: '展現狂草奔放之氣勢，筆觸蒼勁有力。'
+    description: '萬物可愛, 可愛萬物。'
   },
   {
     id: 'p3',
@@ -30,17 +30,17 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     id: 'p4',
     title: '山海',
     imageUrl: './collections/sea.jpg',
-    year: '2024',
-    dimensions: '36x48',
-    description: '如行雲般自在，如流水般順暢。現代潑墨少字數創作。'
+    year: '2025',
+    dimensions: '36x48cm',
+    description: '山海相依, 現代潑墨創作。'
   },
   {
     id: 'p5',
     title: '偕老',
     imageUrl: './collections/c03.jpg',
-    year: '2024',
+    year: '2025',
     dimensions: '36x48cm',
-    description: '如行雲般自在，如流水般順暢。現代潑墨少字數創作。'
+    description: '偕老白頭, 在這年代已經是最珍貴的存在。'
   },
 ];
 
@@ -65,30 +65,48 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: 'c3',
-    title: '單字斗方 | 福',
-    description: '飽滿圓潤的福字，象徵圓滿。',
-    price: 150,
-    imageUrl: 'https://picsum.photos/id/196/600/600',
+    title: '馬上有錢斗方吊飾組',
+    description: '馬上, 有錢。',
+    price: 160,
+    imageUrl: './set3.jpg',
     category: 'couplet',
-    dimensions: '17x17cm'
+    dimensions: '多尺寸組合'
   },
   {
     id: 'c4',
-    title: '客製化姓名對聯',
-    description: '請於備註欄位填寫想要嵌入的姓名或詞句。',
-    price: 800,
-    imageUrl: 'https://picsum.photos/id/214/600/600',
+    title: '開運小吊飾（1個）',
+    description: '內容可客製, 馬上開運！',
+    price: 80,
+    imageUrl: './small.jpg',
     category: 'couplet',
-    dimensions: '17x112cm'
+    dimensions: '多尺寸組合'
   },
    {
-    id: 'c4',
-    title: '客製化姓名對聯',
-    description: '請於備註欄位填寫想要嵌入的姓名或詞句。',
-    price: 800,
-    imageUrl: 'https://picsum.photos/id/214/600/600',
+    id: 'c5',
+    title: '馬上發財紅包組(2個）',
+    description: '馬上有錢又發財',
+    price: 80,
+    imageUrl: './envelope.jpg',
     category: 'couplet',
-    dimensions: '17x112cm'
+    dimensions: '多尺寸組合'
+  },
+  {
+    id: 'c6',
+    title: '客製組合字斗方',
+    description: '歡迎私訊問價',
+    price: 888,
+    imageUrl: './customize.jpg',
+    category: 'couplet',
+    dimensions: ''
+  },
+  {
+    id: 'c6',
+    title: '七字對聯組',
+    description: '黑墨$350, 金墨$400, 內含3張單字斗方',
+    price: 400,
+    imageUrl: './c1.jpg',
+    category: 'couplet',
+    dimensions: ''
   }
 ];
 

@@ -34,7 +34,7 @@ function App() {
             shopScrollRef.current.scrollBy({ left: itemWidth, behavior: 'smooth' });
           }
         }
-      }, 3000); 
+      }, 5000); 
     }
 
     return () => clearInterval(interval);
@@ -328,13 +328,15 @@ function App() {
                   {PRODUCTS.map((product) => (
                     <div 
                       key={product.id} 
-                      className="min-w-[60vw] md:min-w-[220px] lg:min-w-[260px] snap-center flex-shrink-0 bg-white p-3 shadow-sm hover:shadow-md transition-shadow duration-300 border border-stone-100 flex flex-col group/card"
+                      className="w-[280px] md:w-[220px] lg:w-[260px] snap-center flex-shrink-0 bg-white p-3 shadow-sm hover:shadow-md transition-shadow duration-300 border border-stone-100 flex flex-col group/card"
                     >
                       <div className="w-full bg-stone-100 mb-3 overflow-hidden relative border border-stone-100 group-hover/card:border-stone-300 transition-colors">
                         <img src={product.imageUrl} alt={product.title} className="w-full h-[350px] object-contain hover:scale-105 transition-transform duration-500 mix-blend-multiply" />
                         {product.category === 'couplet' && (
-                          <div className="absolute top-2 right-2 w-7 h-7 bg-red-800 rounded-full flex items-center justify-center text-white text-[10px] border border-white shadow-sm font-serif">
-                            吉
+                          <div className="absolute top-2 right-2 w-12 h-12 bg-red-800 rounded-full flex items-center justify-center text-white text-[10px] border border-white shadow-sm font-serif">
+                            馬上
+                            <br />
+                            購買
                           </div>
                         )}
                       </div>
@@ -372,7 +374,7 @@ function App() {
             {/* Portfolio Section */}
             <Section id="portfolio" className="bg-white">
               <div className="flex flex-col items-center mb-16">
-                 <h2 className="text-3xl font-bold tracking-widest border-b-2 border-stone-900 pb-2 mb-4 font-mono"><span className="text-neon-blue">&lt;</span> 墨跡 / Portfolio <span className="text-neon-blue">/&gt;</span></h2>
+                 <h2 className="text-2xl font-bold tracking-widest border-b-2 border-stone-900 pb-2 mb-4 font-mono"><span className="text-neon-blue">&lt;</span> 墨跡 / Portfolio <span className="text-neon-blue">/&gt;</span></h2>
                  <p className="text-stone-500 text-sm font-mono">// 平日寫程式，假日寫寫字</p>
               </div>
               

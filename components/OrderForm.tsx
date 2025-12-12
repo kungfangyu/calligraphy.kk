@@ -7,8 +7,7 @@ import { Trash2, ChevronLeft, CheckCircle2, CreditCard, Calendar, Loader2 } from
 // 2. Get the specific 'entry.xxxxxx' ID for each field by inspecting the form preview or using 'Get pre-filled link'.
 // 3. Paste the IDs below inside the quotes.
 const GOOGLE_FORM_CONFIG = {
-  // Google Form action URL (read from .env.local)
-  FORM_ACTION_URL: import.meta.env.VITE_GOOGLE_FORM_URL,
+  FORM_ACTION_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSd5mXoTqDyPilRClJQ5tTNLeT48EI1_8GyDyYhyGkHLyfjIqg/formResponse',
   
   // Replace these with your specific entry IDs from your Google Form
   ENTRY_IDS: {

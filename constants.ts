@@ -57,7 +57,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'c2',
     title: '金馬立刻賺錢春聯組',
-    description: '內含 七言對聯X1, 組合單字X3, 馬上有錢紅包X2, 四言春聯X1, 馬上有錢開運小吊飾X1。',
+    description: '七言對聯X1, 組合單字X3, 馬上有錢紅包X2, 四言春聯X1, 開運小吊飾X1。',
     price: 700,
     imageUrl: './set2.jpg',
     category: 'couplet',

@@ -3,34 +3,43 @@ import { PortfolioItem, Product } from "./types";
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {
     id: 'p1',
-    title: '靜',
-    imageUrl: 'https://picsum.photos/id/10/800/1000',
-    year: '2023',
-    dimensions: '35x135cm',
-    description: '心如止水，萬物皆靜。行書創作，墨色濃淡相間。'
+    title: '大展鴻圖',
+    imageUrl: './collections/c08.jpg',
+    year: '2025',
+    dimensions: '36x48cm',
+    description: '我送阿叔茶具他研磨下筆,直接給我四個字「大展宏圖」。'
   },
   {
     id: 'p2',
-    title: '龍飛鳳舞',
-    imageUrl: 'https://picsum.photos/id/1015/800/600',
-    year: '2023',
+    title: '可愛萬物',
+    imageUrl: './collections/c05.jpg',
+    year: '2025',
     dimensions: '69x135cm',
     description: '展現狂草奔放之氣勢，筆觸蒼勁有力。'
   },
   {
     id: 'p3',
-    title: '初心',
-    imageUrl: 'https://picsum.photos/id/1016/800/1000',
-    year: '2024',
-    dimensions: '35x69cm',
-    description: '莫忘初心，方得始終。隸書風格，古樸端莊。'
+    title: '台灣加油',
+    imageUrl: './collections/tw.jpg',
+    year: '2025',
+    dimensions: '',
+    description: '台灣加油，我們一起加油。'
   },
+  
   {
     id: 'p4',
-    title: '行雲流水',
-    imageUrl: 'https://picsum.photos/id/1043/800/800',
+    title: '山海',
+    imageUrl: './collections/sea.jpg',
     year: '2024',
-    dimensions: '50x50cm',
+    dimensions: '36x48',
+    description: '如行雲般自在，如流水般順暢。現代潑墨少字數創作。'
+  },
+  {
+    id: 'p5',
+    title: '偕老',
+    imageUrl: './collections/c03.jpg',
+    year: '2024',
+    dimensions: '36x48cm',
     description: '如行雲般自在，如流水般順暢。現代潑墨少字數創作。'
   },
 ];

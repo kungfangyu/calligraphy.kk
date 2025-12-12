@@ -252,7 +252,7 @@ function App() {
                        <span className="text-stone-300">01</span> <span className="text-neon-blue">const</span> <span className="text-yellow-600">project</span> <span className="text-stone-600">=</span>
                     </div>
                     <h1 className="text-2xl md:text-7xl lg:text-7xl font-black tracking-tighter text-stone-900 leading-none drop-shadow-2xl font-serif">
-                      <span className="text-stone-800">Code & Ink</span>
+                      <span className="text-stone-800">寫字; 寫字</span>
                       <span className="inline-block w-4 h-16 md:h-24 bg-stone-900 ml-4 animate-cursor-blink align-middle"></span>
                     </h1>
                      <div className="font-mono text-sm md:text-base text-stone-400 mt-2 text-right w-full">
@@ -286,45 +286,12 @@ function App() {
                </div>
             </header>
 
-            {/* Portfolio Section */}
-            <Section id="portfolio" className="bg-white">
-              <div className="flex flex-col items-center mb-16">
-                 <h2 className="text-3xl font-bold tracking-widest border-b-2 border-stone-900 pb-2 mb-4 font-mono"><span className="text-neon-blue">&lt;</span> 墨跡 / Portfolio <span className="text-neon-blue">/&gt;</span></h2>
-                 <p className="text-stone-500 text-sm font-mono">// 平日敲鍵盤，假日揮毫筆</p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[300px]">
-                {PORTFOLIO_ITEMS.map((item, index) => (
-                  <div 
-                    key={item.id} 
-                    onClick={() => setSelectedPortfolioItem(item)}
-                    className={`group relative overflow-hidden bg-stone-100 cursor-pointer ${index === 1 || index === 2 ? 'md:col-span-2' : ''}`}
-                  >
-                    <img 
-                      src={item.imageUrl} 
-                      alt={item.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
-                    />
-                    <div className="absolute inset-0 bg-ink-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                      <div className="text-white text-center p-4 border border-white/20 m-4 tech-corner">
-                        <ZoomIn size={32} className="mx-auto mb-2 opacity-80 text-neon-blue" />
-                        <h3 className="text-2xl font-bold mb-1 font-serif">{item.title}</h3>
-                        <p className="font-mono text-sm opacity-80 text-terminal-green">console.log(details)</p>
-                      </div>
-                    </div>
-                    {/* Tech Markers */}
-                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-stone-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-stone-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  </div>
-                ))}
-              </div>
-            </Section>
 
             {/* Shop Section (Carousel) */}
             <Section id="shop" className="bg-stone-50 overflow-hidden" fullWidth>
                <div className="max-w-6xl mx-auto px-4 md:px-8 mb-12 flex flex-col items-center">
                  <h2 className="text-3xl font-bold tracking-widest border-b-2 border-red-800 pb-2 mb-4 text-red-900 font-mono"><span className="text-stone-400">new</span> Shop()</h2>
-                 <p className="text-stone-500 text-sm font-mono">/* 龍舞春風，筆墨傳情 */</p>
+                 <p className="text-stone-500 text-sm font-mono">/* 馬年大發, 馬上開運 */</p>
               </div>
 
               <div 
@@ -397,34 +364,99 @@ function App() {
               </div>
             </Section>
 
-            {/* About Section */}
-            <Section id="about" className="bg-white">
-              <div className="flex flex-col md:flex-row items-center gap-12">
-                <div className="md:w-1/2 relative">
-                    <div className="absolute -top-4 -left-4 w-12 h-12 border-t-2 border-l-2 border-stone-900"></div>
-                    <div className="absolute -bottom-4 -right-4 w-12 h-12 border-b-2 border-r-2 border-stone-900"></div>
-                   <img src="https://picsum.photos/id/1005/600/800" alt="Artist working" className="w-full h-[400px] object-cover grayscale md:rounded-lg" />
-                </div>
-                <div className="md:w-1/2 space-y-6">
-                  <h2 className="text-4xl font-bold mb-4 font-serif">關於 <span className="font-mono text-3xl text-stone-600 align-middle">工程師寫書法</span></h2>
-                  <div className="font-mono text-xs text-stone-400 mb-4 p-4 bg-stone-900 rounded-sm overflow-x-auto">
-                     <p className="text-green-500">class <span className="text-yellow-500">Artist</span> <span className="text-blue-400">extends</span> <span className="text-yellow-500">Engineer</span> {'{'}</p>
-                     <p className="pl-4 text-stone-300">work() {'{'}</p>
-                     <p className="pl-8 text-stone-400">return <span className="text-orange-400">'Logic & Architecture'</span>;</p>
-                     <p className="pl-4 text-stone-300">{'}'}</p>
-                     <p className="pl-4 text-stone-300">create() {'{'}</p>
-                     <p className="pl-8 text-stone-400">return <span className="text-orange-400">'Ink & Emotion'</span>;</p>
-                     <p className="pl-4 text-stone-300">{'}'}</p>
-                     <p className="text-stone-300">{'}'}</p>
+
+            {/* Portfolio Section */}
+            <Section id="portfolio" className="bg-white">
+              <div className="flex flex-col items-center mb-16">
+                 <h2 className="text-3xl font-bold tracking-widest border-b-2 border-stone-900 pb-2 mb-4 font-mono"><span className="text-neon-blue">&lt;</span> 墨跡 / Portfolio <span className="text-neon-blue">/&gt;</span></h2>
+                 <p className="text-stone-500 text-sm font-mono">// 平日寫程式，假日寫寫字</p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[300px]">
+                {PORTFOLIO_ITEMS.map((item, index) => (
+                  <div 
+                    key={item.id} 
+                    onClick={() => setSelectedPortfolioItem(item)}
+                    className={`group relative overflow-hidden bg-stone-100 cursor-pointer ${index === 1 || index === 2 ? 'md:col-span-2' : ''}`}
+                  >
+                    <img 
+                      src={item.imageUrl} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 bg-ink-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
+                      <div className="text-white text-center p-4 border border-white/20 m-4 tech-corner">
+                        <ZoomIn size={32} className="mx-auto mb-2 opacity-80 text-neon-blue" />
+                        <h3 className="text-2xl font-bold mb-1 font-serif">{item.title}</h3>
+                        {/* <p className="font-mono text-sm opacity-80 text-terminal-green">console.log(details)</p> */}
+                      </div>
+                    </div>
+                    {/* Tech Markers */}
+                    <div className="absolute top-2 left-2 w-2 h-2 border-t border-l border-stone-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="absolute bottom-2 right-2 w-2 h-2 border-b border-r border-stone-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                   </div>
-                  <p className="text-stone-600 leading-loose border-l-2 border-stone-200 pl-4">
-                    「工程師寫書法」不僅是一個品牌，更是一種生活平衡的實踐。
-                    我試圖將程式設計的精確性與書法藝術的流動性結合，
-                    創造出既有現代極簡美感，又不失傳統底蘊的作品。
-                  </p>
-                  <div className="pt-4">
-                     <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noreferrer" className="inline-flex items-center text-stone-900 font-bold border-b-2 border-stone-900 hover:text-stone-600 hover:border-stone-600 transition-colors pb-1">
-                       追蹤 Instagram @calligraphy.kk <ArrowRight size={16} className="ml-2" />
+                ))}
+              </div>
+            </Section>
+
+            {/* About Section */}
+            <Section id="about" className="bg-stone-50/50">
+              <div className="relative flex flex-col md:flex-row items-center gap-16">
+                {/* Image Section */}
+                <div className="md:w-5/12 relative group">
+                    {/* Abstract decoration - Tech + Ink */}
+                    <div className="absolute -top-6 -left-6 w-24 h-24 border-t-[1px] border-l-[1px] border-stone-300 opacity-50 transition-all duration-500 group-hover:border-stone-800"></div>
+                    <div className="absolute -bottom-6 -right-6 w-24 h-24 border-b-[1px] border-r-[1px] border-stone-300 opacity-50 transition-all duration-500 group-hover:border-stone-800"></div>
+                    
+                    {/* Main Image Container */}
+                    <div className="relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 ease-out">
+                       <img src="./kk.jpg" alt="Artist working" className="w-full h-[500px] object-cover" />
+                       {/* Tech Overlay */}
+                       <div className="absolute inset-0 bg-[linear-gradient(transparent_2px,rgba(0,0,0,0.1)_2px)] bg-[size:100%_4px] pointer-events-none opacity-20"></div>
+                    </div>
+
+                    {/* Floating Tag */}
+                    <div className="absolute bottom-8 -left-4 bg-white px-4 py-2 shadow-xl border-l-2 border-stone-900 hidden md:block">
+                         <span className="font-mono text-xs tracking-widest text-stone-500">Scanning... <span className="animate-pulse text-green-600">100%</span></span>
+                    </div>
+                </div>
+
+                {/* Text Section */}
+                <div className="md:w-7/12 space-y-8">
+                  {/* Header */}
+                  <div className="relative">
+                     <p className="font-mono text-sm text-stone-400 mb-2 flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-neon-blue inline-block"></span>
+                        <span className="text-stone-300">03</span> About.tsx
+                     </p>
+                     <h2 className="text-3xl md:text-3xl font-sans font-bold text-stone-900 tracking-tight leading-none mb-6">
+                        工程師寫書法<span className="text-neon-blue">.</span>
+                     </h2>
+                  </div>
+
+                  {/* The "Code vs Art" Concept Block - Simplified */}
+                  <div className="relative pl-8 border-l border-stone-200 py-2 hover:border-stone-400 transition-colors duration-500">
+                     {/* Code Logic - Minimalist */}
+                     <div className="font-mono text-sm text-stone-500 space-y-2 mb-6 bg-stone-100/50 p-4 rounded-sm border border-stone-100 inline-block w-full">
+                        <p><span className="text-purple-600">const</span> <span className="text-blue-600">core</span> = <span className="text-stone-900">{'['}</span></p>
+                        <p className="pl-4 text-stone-600">'Logic', <span className="text-stone-400">// The Engineer</span></p>
+                        <p className="pl-4 text-stone-600">'Aesthetics' <span className="text-stone-400">// The Artist</span></p>
+                        <p><span className="text-stone-900">{']'}</span>.reduce((<span className="text-orange-600">a, b</span>) =&gt; a + b);</p>
+                     </div>
+
+                     {/* Descriptive Text */}
+                     <p className="text-stone-600 leading-8 font-serif text-lg text-justify max-w-lg">
+                         軟體與書法都是創造—— <br />
+一個用語法構築應用，一個用筆觸留住呼吸。
+我在兩者間找到生活中的平衡，讓邏輯和感性融合成我平日的創作靈感。
+                     </p>
+                  </div>
+
+                  {/* Signature / CTA */}
+                  <div className="pt-4 flex items-center gap-6">
+                     <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-stone-900 font-mono text-xs md:text-sm uppercase tracking-widest hover:text-neon-blue transition-colors">
+                        <span className="w-8 h-[1px] bg-stone-900 group-hover:bg-neon-blue transition-colors"></span>
+                        Follow My Instagram @calligraphy.kk <ArrowRight size={16} className="ml-2" />
                      </a>
                   </div>
                 </div>

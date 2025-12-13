@@ -47,6 +47,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shippingFee = 60;
@@ -85,7 +86,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (cart.length === 0) {
       alert("購物車是空的");
@@ -93,10 +94,14 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
     }
 
     if (!validateForm()) {
-      // Scroll to top or first error could be good, but simple return is enough for now
       return;
     }
 
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmedSubmit = async () => {
+    setShowConfirmation(false);
     setIsSubmitting(true);
 
     // 1. Format order details into a string
@@ -104,7 +109,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
       `${item.title} (${item.dimensions}) x ${item.quantity} - $${item.price * item.quantity}`
     ).join('\n');
 
-    //2. Submit using hidden iframe (most reliable method for Google Forms)
+    // 2. Submit using hidden iframe
     const iframe = document.createElement('iframe');
     iframe.name = 'hidden_iframe';
     iframe.style.display = 'none';
@@ -147,6 +152,9 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
       document.body.removeChild(form);
       document.body.removeChild(iframe);
     }, 1000);
+
+    // Simulate a small delay for better UX
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     setIsSubmitted(true);
     onClearCart(); // Clear cart after successful submission
@@ -380,6 +388,42 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
           )}
         </div>
       </div>
+
+      {/* Confirmation Modal */}
+      {showConfirmation && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-sm animate-ink">
+          <div className="bg-white p-8 rounded-sm shadow-2xl max-w-md w-full border border-stone-200 relative tech-corner">
+             {/* Tech decoration */}
+            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-stone-900"></div>
+            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-stone-900"></div>
+            
+            <h3 className="text-xl font-bold mb-4 font-serif text-stone-900 text-center">
+              確認送出訂單？
+            </h3>
+            <p className="text-stone-600 mb-8 text-center leading-relaxed">
+              請確認您的訂購資訊與匯款後五碼是否正確。<br/>
+              送出後將由專人為您核對並安排出貨。
+            </p>
+            
+            <div className="flex gap-4">
+              <button
+                type="button"
+                onClick={() => setShowConfirmation(false)}
+                className="flex-1 py-3 border border-stone-300 text-stone-600 font-mono hover:bg-stone-50 transition-colors"
+              >
+                再想想
+              </button>
+              <button
+                type="button"
+                onClick={handleConfirmedSubmit}
+                className="flex-1 py-3 bg-stone-900 text-white font-mono hover:bg-stone-700 transition-colors shadow-lg"
+              >
+                確認送出
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

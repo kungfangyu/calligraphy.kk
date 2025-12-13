@@ -321,6 +321,9 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
               )}
             </button>
           </form>
+          <p className="text-xs text-stone-400 text-center mt-4">
+            *您的個人資料僅用於本次訂單聯絡與出貨，絕不外流。
+          </p>
         </div>
 
         {/* Right Col: Cart Summary */}

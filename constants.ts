@@ -109,14 +109,23 @@ export const PRODUCTS: Product[] = [
     category: 'couplet',
     dimensions: ''
   },
+   {
+    id: 'c9',
+    title: '馬上有錢斗方組',
+    description: '內含2張單字斗方',
+    price: 120,
+    imageUrl: './hourse.jpg',
+    category: 'couplet',
+    dimensions: '17x17cm'
+  },
     {
     id: 'c6',
     title: '客製組合字斗方',
-    description: '請勿下單,私訊問價',
-    price: 888,
+    description: '請在備注註明想要的內容（限定4個字）',
+    price: 50,
     imageUrl: './customize.jpg',
     category: 'couplet',
-    dimensions: ''
+    dimensions: '17x17cm'
   },
 ];
 

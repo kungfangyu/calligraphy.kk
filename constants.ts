@@ -90,24 +90,34 @@ export const PRODUCTS: Product[] = [
     category: 'couplet',
     dimensions: '多尺寸組合'
   },
+
   {
+    id: 'c7',
+    title: '七字對聯組(黑墨）',
+    description: '內含3張單字斗方,下單請註明居家or生意聯',
+    price: 350,
+    imageUrl: './c1.jpg',
+    category: 'couplet',
+    dimensions: ''
+  },
+  {
+    id: 'c8',
+    title: '七字對聯組（金墨）',
+    description: '內含3張單字斗方, 下單請註明居家or生意聯',
+    price: 400,
+    imageUrl: './golden.jpg',
+    category: 'couplet',
+    dimensions: ''
+  },
+    {
     id: 'c6',
     title: '客製組合字斗方',
-    description: '私訊問價',
+    description: '請勿下單,私訊問價',
     price: 888,
     imageUrl: './customize.jpg',
     category: 'couplet',
     dimensions: ''
   },
-  {
-    id: 'c6',
-    title: '七字對聯組',
-    description: '黑墨$350, 金墨$400, 內含3張單字斗方',
-    price: 400,
-    imageUrl: './c1.jpg',
-    category: 'couplet',
-    dimensions: ''
-  }
 ];
 
 export const SOCIAL_LINKS = {

@@ -72,7 +72,7 @@ export const PRODUCTS: Product[] = [
     category: 'couplet',
     dimensions: '多尺寸組合'
   },
-  {
+   {
     id: 'c4',
     title: '開運小吊飾（1個）',
     description: '內容可客製, 馬上開運！',
@@ -81,8 +81,17 @@ export const PRODUCTS: Product[] = [
     category: 'couplet',
     dimensions: '多尺寸組合'
   },
-   {
+  {
     id: 'c5',
+    title: '馬上有錢吊飾',
+    description: '掛上門把馬上有錢',
+    price: 150,
+    imageUrl: './de1.jpg',
+    category: 'couplet',
+    dimensions: '10x10cm'
+  },
+   {
+    id: 'c6',
     title: '馬上發財紅包組(2個）',
     description: '馬上有錢又發財',
     price: 80,
@@ -110,7 +119,7 @@ export const PRODUCTS: Product[] = [
     dimensions: ''
   },
    {
-    id: 'c10',
+    id: 'c9',
     title: '馬上有財賺斗方組',
     description: '2張單字斗方',
     price: 120,
@@ -119,7 +128,7 @@ export const PRODUCTS: Product[] = [
     dimensions: '17x17cm'
   },
    {
-    id: 'c9',
+    id: 'c10',
     title: '馬上有錢斗方組',
     description: '內含2張單字斗方',
     price: 120,
@@ -128,10 +137,19 @@ export const PRODUCTS: Product[] = [
     dimensions: '17x17cm'
   },
     {
-    id: 'c6',
+    id: 'c12',
+    title: '馬上全餐組',
+    description: '9張組合字',
+    price: 450,
+    imageUrl: './set9.jpg',
+    category: 'couplet',
+    dimensions: '17x17cm'
+  },
+    {
+    id: 'discount01',
     title: '客製組合字斗方',
-    description: '請在備注註明想要的內容（限定4個字）',
-    price: 50,
+    description: '下定3張(含）以上50元/張,請在備注註明想要的內容（限定4個字）',
+    price: 60,
     imageUrl: './customize.jpg',
     category: 'couplet',
     dimensions: '17x17cm'

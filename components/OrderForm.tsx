@@ -50,8 +50,15 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  
+  // Calculate discount for 'c13' (Custom Couplet)
+  // Logic: Original 60, but if quantity >= 3, price becomes 50.
+  // So discount is (60 - 50) * quantity = 10 * quantity
+  const discountItem = cart.find(item => item.id === 'discount01');
+  const discount = (discountItem && discountItem.quantity >= 3) ? (10 * discountItem.quantity) : 0;
+
   const shippingFee = 60;
-  const totalAmount = subtotal + shippingFee;
+  const totalAmount = subtotal + shippingFee - discount;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -379,6 +386,12 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
                   <span>運費 Shipping</span>
                   <span className="font-mono">NT$ {shippingFee}</span>
                 </div>
+                {discount > 0 && (
+                  <div className="flex justify-between items-center text-terminal-green text-sm">
+                    <span>折扣 Discount (3張以上優惠)</span>
+                    <span className="font-mono">- NT$ {discount}</span>
+                  </div>
+                )}
                 <div className="flex justify-between items-center pt-2 border-t border-stone-100">
                   <span className="font-bold text-lg">總計 Total</span>
                   <span className="font-bold text-xl font-mono text-red-800">NT$ {totalAmount}</span>

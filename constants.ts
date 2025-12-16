@@ -110,6 +110,15 @@ export const PRODUCTS: Product[] = [
     dimensions: ''
   },
    {
+    id: 'c10',
+    title: '馬上有財賺斗方組',
+    description: '2張單字斗方',
+    price: 120,
+    imageUrl: './earn.jpg',
+    category: 'couplet',
+    dimensions: '17x17cm'
+  },
+   {
     id: 'c9',
     title: '馬上有錢斗方組',
     description: '內含2張單字斗方',

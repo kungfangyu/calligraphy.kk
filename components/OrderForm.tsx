@@ -191,10 +191,12 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
           
           <div className="bg-stone-50 p-4 rounded mb-6 text-sm text-stone-600 border-l-4 border-stone-300">
             <ul className="list-disc pl-5 space-y-1">
+              
               <li>請於填寫表單後三日內完成匯款, 確認成功後會寄信通知。</li>
               <li>僅提供 7-11 與全家店到店，運費 $60（顯示於總額） 需自行負擔。</li>
               <li>商品將於匯款確認成功後 10 個工作日內寄出。</li>
               <li>若有客製或是其他需求請私訊 @calligraphy.kk 詢問。</li>
+              <li className="font-bold text-red-800 underline">作品版權所有，請勿商用或轉賣。</li>
             </ul>
           </div>
           <form onSubmit={handleSubmit} className="space-y-4">

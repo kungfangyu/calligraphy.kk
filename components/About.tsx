@@ -1,7 +1,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Section from "./Section";
-import { SOCIAL_LINKS } from "../constants";
+import { SOCIAL_LINKS } from "../constants/constants";
 
 const About: React.FC = () => {
   return (

@@ -9,7 +9,7 @@ import OrderForm from "./components/OrderForm";
 import PortfolioModal from "./components/PortfolioModal";
 import Toast from "./components/Toast";
 import Footer from "./components/Footer";
-import { PRODUCTS } from "./constants";
+import { PRODUCTS } from "./constants/constants";
 import { CartItem, PortfolioItem } from "./types";
 
 function App() {

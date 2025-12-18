@@ -1,4 +1,4 @@
-import { PortfolioItem, Product } from "./types";
+import { PortfolioItem, Product } from "../types";
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {

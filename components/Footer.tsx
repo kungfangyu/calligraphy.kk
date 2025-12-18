@@ -1,6 +1,6 @@
 import React from "react";
 import { Instagram } from "lucide-react";
-import { SOCIAL_LINKS } from "../constants";
+import { SOCIAL_LINKS } from "../constants/constants";
 
 const Footer: React.FC = () => {
   return (

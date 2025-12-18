@@ -1,7 +1,7 @@
 import React from "react";
 import { ZoomIn, ArrowRight } from "lucide-react";
 import Section from "./Section";
-import { PORTFOLIO_ITEMS, SOCIAL_LINKS } from "../constants";
+import { PORTFOLIO_ITEMS, SOCIAL_LINKS } from "../constants/constants";
 import { PortfolioItem } from "../types";
 
 interface PortfolioProps {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu, X, ShoppingBag, Instagram } from "lucide-react";
-import { SOCIAL_LINKS } from "../constants";
+import { SOCIAL_LINKS } from "../constants/constants";
 import { CartItem } from "../types";
 
 interface NavbarProps {

@@ -1,27 +1,9 @@
 import React, { useState } from 'react';
 import { CartItem, OrderFormState } from '../types';
 import { Trash2, ChevronLeft, CheckCircle2, CreditCard, Calendar, Loader2 } from 'lucide-react';
+import ConfirmPopup from './popup/ConfirmPopup';
+import { GOOGLE_FORM_CONFIG } from '../constants/googleSheets';
 
-// Google Form Configuration
-// 1. Create a Google Form with these fields (Short Answer for most, Paragraph for 'Order Details').
-// 2. Get the specific 'entry.xxxxxx' ID for each field by inspecting the form preview or using 'Get pre-filled link'.
-// 3. Paste the IDs below inside the quotes.
-const GOOGLE_FORM_CONFIG = {
-  FORM_ACTION_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSd5mXoTqDyPilRClJQ5tTNLeT48EI1_8GyDyYhyGkHLyfjIqg/formResponse',
-  
-  // Replace these with your specific entry IDs from your Google Form
-  ENTRY_IDS: {
-    name: 'entry.1756594969',           // 1111 - 姓名
-    phone: 'entry.1033544179',          // 2222 - 電話
-    email: 'entry.1219332612',          // 3333 - Email
-    address: 'entry.33586878',          // 4444 - 地址
-    orderDetails: 'entry.61059090',     // 5555 - 訂單內容
-    totalAmount: 'entry.569083998',     // 6666 - 總金額
-    bankLast5: 'entry.854245075',       // 77777 - 帳號末五碼
-    remittanceDate: 'entry.184934367',  // 2025-12-13 - 匯款日期
-    message: 'entry.676429565',         // 8888 - 備註
-  }
-};
 
 interface OrderFormProps {
   cart: CartItem[];
@@ -51,7 +33,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
 
   const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   
-  // Calculate discount for 'c13' (Custom Couplet)
+  // Calculate discount for 'discount01' (Custom Couplet)
   // Logic: Original 60, but if quantity >= 3, price becomes 50.
   // So discount is (60 - 50) * quantity = 10 * quantity
   const discountItem = cart.find(item => item.id === 'discount01');
@@ -404,38 +386,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ cart, onUpdateQuantity, onRemoveI
 
       {/* Confirmation Modal */}
       {showConfirmation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/40 backdrop-blur-sm animate-ink">
-          <div className="bg-white p-8 rounded-sm shadow-2xl max-w-md w-full border border-stone-200 relative tech-corner">
-             {/* Tech decoration */}
-            <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-stone-900"></div>
-            <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-stone-900"></div>
-            
-            <h3 className="text-xl font-bold mb-4 font-serif text-stone-900 text-center">
-              確認送出訂單？
-            </h3>
-            <p className="text-stone-600 mb-8 text-center leading-relaxed">
-              請確認您的訂購資訊與匯款後五碼是否正確。<br/>
-              送出後將由專人為您核對並安排出貨。
-            </p>
-            
-            <div className="flex gap-4">
-              <button
-                type="button"
-                onClick={() => setShowConfirmation(false)}
-                className="flex-1 py-3 border border-stone-300 text-stone-600 font-mono hover:bg-stone-50 transition-colors"
-              >
-                再想想
-              </button>
-              <button
-                type="button"
-                onClick={handleConfirmedSubmit}
-                className="flex-1 py-3 bg-stone-900 text-white font-mono hover:bg-stone-700 transition-colors shadow-lg"
-              >
-                確認送出
-              </button>
-            </div>
-          </div>
-        </div>
+        <ConfirmPopup setShowConfirmation={setShowConfirmation} handleConfirmedSubmit={handleConfirmedSubmit}/>
       )}
     </div>
   );

@@ -1,8 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Section from "./Section";
-import { PRODUCTS } from "../constants";
+import { PRODUCTS } from "../constants/constants";
 import { CartItem, Product } from "../types";
+import useEmblaCarousel from "embla-carousel-react";
+import AutoScroll from "embla-carousel-auto-scroll";
+import { EmblaCarouselType } from "embla-carousel";
 
 interface ShopCarouselProps {
   addToCart: (product: Product) => void;
@@ -15,45 +18,68 @@ const ShopCarousel: React.FC<ShopCarouselProps> = ({
   cart,
   navigateTo,
 }) => {
-  const shopScrollRef = useRef<HTMLDivElement>(null);
-  const [isCarouselPaused, setIsCarouselPaused] = useState(false);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true, 
+      align: "start",
+      dragFree: true,
+      breakpoints: {
+        "(min-width: 768px)": { watchDrag: true }
+      }
+    },
+    [
+      AutoScroll({ 
+        playOnInit: true, 
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+        speed: 1
+      })
+    ]
+  );
 
-  // Auto-play Carousel Logic
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, []);
+
   useEffect(() => {
-    let interval: number;
+    if (!emblaApi) return;
 
-    if (!isCarouselPaused) {
-      interval = window.setInterval(() => {
-        if (shopScrollRef.current) {
-          const { scrollLeft, scrollWidth, clientWidth } =
-            shopScrollRef.current;
-          const itemWidth =
-            window.innerWidth < 768 ? window.innerWidth * 0.7 : 300;
+    onSelect(emblaApi);
+    emblaApi.on("reInit", onSelect);
+    emblaApi.on("select", onSelect);
 
-          if (scrollLeft + clientWidth >= scrollWidth - 10) {
-            shopScrollRef.current.scrollTo({ left: 0, behavior: "smooth" });
-          } else {
-            shopScrollRef.current.scrollBy({
-              left: itemWidth,
-              behavior: "smooth",
-            });
-          }
-        }
-      }, 5000);
-    }
+    const autoScroll = emblaApi.plugins().autoScroll;
+    if (!autoScroll) return;
+    
+    // Logic to handle AutoScroll based on screen size
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        autoScroll.play();
+      } else {
+        autoScroll.stop();
+      }
+    };
 
-    return () => clearInterval(interval);
-  }, [isCarouselPaused]);
-
-  const scrollShop = (direction: "left" | "right") => {
-    if (shopScrollRef.current) {
-      const scrollAmount = 300;
-      shopScrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
+    handleResize(); // Initial check
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [emblaApi, onSelect]);
 
   return (
     <Section id="shop" className="bg-stone-50 overflow-hidden" fullWidth>
@@ -66,86 +92,83 @@ const ShopCarousel: React.FC<ShopCarouselProps> = ({
         </p>
       </div>
 
-      <div
-        className="relative group/shop max-w-7xl mx-auto px-0 md:px-12"
-        onMouseEnter={() => setIsCarouselPaused(true)}
-        onMouseLeave={() => setIsCarouselPaused(false)}
-        onTouchStart={() => setIsCarouselPaused(true)}
-        onTouchEnd={() => setIsCarouselPaused(false)}
-      >
+      <div className="relative group/shop max-w-7xl mx-auto px-0 md:px-12 overflow-hidden">
         {/* Left Arrow */}
         <button
-          onClick={() => scrollShop("left")}
+          onClick={scrollPrev}
           className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-3 rounded-full shadow-lg hover:bg-stone-900 hover:text-white transition-all opacity-0 group-hover/shop:opacity-100 focus:opacity-100 hidden md:block"
+          aria-label="Previous slide"
         >
           <ChevronLeft size={24} />
         </button>
 
         {/* Right Arrow */}
         <button
-          onClick={() => scrollShop("right")}
+          onClick={scrollNext}
           className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 p-3 rounded-full shadow-lg hover:bg-stone-900 hover:text-white transition-all opacity-0 group-hover/shop:opacity-100 focus:opacity-100 hidden md:block"
+          aria-label="Next slide"
         >
           <ChevronRight size={24} />
         </button>
 
-        <div
-          ref={shopScrollRef}
-          className="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar pb-8 px-4 md:px-0"
-        >
-          {PRODUCTS.map((product) => (
-            <div
-              key={product.id}
-              className="w-[280px] md:w-[220px] lg:w-[260px] snap-center flex-shrink-0 bg-white p-3 shadow-sm hover:shadow-md transition-shadow duration-300 border border-stone-100 flex flex-col group/card"
-            >
-              <div className="w-full bg-stone-100 mb-3 overflow-hidden relative border border-stone-100 group-hover/card:border-stone-300 transition-colors">
-                <img
-                  src={product.imageUrl}
-                  alt={product.title}
-                  className="w-full h-[350px] object-contain hover:scale-105 transition-transform duration-500 mix-blend-multiply"
-                />
-                {product.category === "couplet" && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      addToCart(product);
-                    }}
-                    className="absolute top-2 right-2 w-12 h-12 bg-red-800 rounded-full flex items-center justify-center text-white text-[10px] border border-white shadow-sm font-serif hover:bg-red-900 hover:scale-110 transition-all duration-300 cursor-pointer active:scale-95"
-                  >
-                    馬上
-                    <br />
-                    購買
-                  </button>
-                )}
+        <div className="overflow-hidden no-scrollbar" ref={emblaRef}>
+          <div className="flex -ml-4 md:-ml-6">
+            {PRODUCTS.map((product) => (
+              <div
+                key={product.id}
+                className="flex-[0_0_280px] md:flex-[0_0_240px] lg:flex-[0_0_300px] min-w-0 pl-4 md:pl-6"
+              >
+                <div className="bg-white p-3 shadow-sm hover:shadow-md transition-shadow duration-300 border border-stone-100 flex flex-col h-full group/card">
+                  <div className="w-full bg-stone-100 mb-3 overflow-hidden relative border border-stone-100 group-hover/card:border-stone-300 transition-colors">
+                    <img
+                      src={product.imageUrl}
+                      alt={product.title}
+                      className="w-full h-[350px] object-contain hover:scale-105 transition-transform duration-500 mix-blend-multiply"
+                    />
+                    {product.category === "couplet" && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          addToCart(product);
+                        }}
+                        className="absolute top-2 right-2 w-12 h-12 bg-red-800 rounded-full flex items-center justify-center text-white text-[10px] border border-white shadow-sm font-serif hover:bg-red-900 hover:scale-110 transition-all duration-300 cursor-pointer active:scale-95"
+                      >
+                        馬上
+                        <br />
+                        購買
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex-grow">
+                    <h3 className="font-bold text-base mb-1 font-serif">
+                      {product.title}
+                    </h3>
+                    <p className="text-[10px] text-stone-400 font-mono mb-1">
+                      const size = '{product.dimensions}';
+                    </p>
+                    <p className="text-xs text-stone-600 mb-2 line-clamp-2 leading-relaxed">
+                      {product.description}
+                    </p>
+                  </div>
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-stone-100">
+                    <span className="font-mono text-base font-bold text-stone-900">
+                      NT$ {product.price}
+                    </span>
+                    <button
+                      onClick={() => addToCart(product)}
+                      className="text-xs bg-stone-900 text-white px-3 py-1.5 hover:bg-stone-700 transition-colors font-mono flex items-center gap-1"
+                    >
+                      add()
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div className="flex-grow">
-                <h3 className="font-bold text-base mb-1 font-serif">
-                  {product.title}
-                </h3>
-                <p className="text-[10px] text-stone-400 font-mono mb-1">
-                  const size = '{product.dimensions}';
-                </p>
-                <p className="text-xs text-stone-600 mb-2 line-clamp-2 leading-relaxed">
-                  {product.description}
-                </p>
-              </div>
-              <div className="flex items-center justify-between mt-3 pt-3 border-t border-stone-100">
-                <span className="font-mono text-base font-bold text-stone-900">
-                  NT$ {product.price}
-                </span>
-                <button
-                  onClick={() => addToCart(product)}
-                  className="text-xs bg-stone-900 text-white px-3 py-1.5 hover:bg-stone-700 transition-colors font-mono flex items-center gap-1"
-                >
-                  add()
-                </button>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="text-center mt-6">
+      <div className="text-center mt-12">
         <button
           onClick={() => navigateTo("order")}
           className={`px-8 py-3 bg-red-900 text-white tracking-wider hover:bg-red-800 transition-all shadow-lg font-mono ${
